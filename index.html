@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Para que Google no indexe esta landing -->
+    <meta name="googlebot" content="noindex" />
+    <meta name="googlebot-news" content="nosnippet" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!---->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/style.css?v3">
+
+    <style>
+        #gpt_zocalo, 
+        #clever-45754-sticky-footer-shadow,
+        #browsi_wrapper_0_ai_1_rc_0,
+        #browsi_wrapper_1_ai_1_rc_0,
+        #browsi_wrapper_2_ai_1_rc_0,
+        #browsi_wrapper_3_ai_1_rc_0,
+        #browsi_wrapper_4_ai_1_rc_0,
+        #browsi_wrapper_5_ai_1_rc_0,
+         #browsi_wrapper_6_ai_1_rc_0,
+        #browsi_wrapper_7_ai_1_rc_0,
+        #browsi_wrapper_8_ai_1_rc_0,
+        #browsi_wrapper_9_ai_1_rc_0,
+        #browsi_wrapper_10_ai_1_rc_0,
+        .fs-sticky-footer,
+        .orp-player-wrapper,
+        #clever-45754-sticky-footer,
+        #elcomercio_zocalo{
+                display: none !important;
+                height: 0 !important;
+        }   
+        .nav-d__main-scroll.scrolled{
+            z-index: 9999;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="box-header"> 
+        <div class="ctn-header">
+            
+            <div id="social">
+                <button id="fb" class="sharer button" data-sharer="facebook" data-hashtag="" data-url="#">Facebook</button>
+        
+                <button id="wst" class="sharer button" data-sharer="whatsapp" data-title="El Comercio" data-url="#">Whatsapp</button>
+        
+                <button id="tw" class="sharer button" data-sharer="twitter" data-title="El Comercio" data-hashtags="" data-via="elcomercio_peru" data-url="#">Twitter</button>
+            </div>
+        </div>  
+    </div>
+
+    <div id="startScreen">
+        <div class="box-titular">
+                        
+            <h1>
+                ¿Qué tanto sabes del pisco?
+            </h1>
+            <p>
+                Ponte a prueba con esta trivia de la bebida bandera del Perú <span>Este 27 de julio, en el marco del Día Nacional del Pisco y las Fiestas Patrias, demuestra cuánto sabes sobre el famoso destilado peruano.</span>
+            </p>
+            <button onclick="startQuiz()">Empezar</button>
+        </div>      
+        <div class="box-footer">
+            <p>
+                <span>Contenido:</span> Provecho               
+            </p>
+            <p>
+                <span>Realización:</span> Nuevas Narrativas EC
+            </p>
+        </div>
+    </div>
+
+    <div class="box-main-trivia" id="box-main-trivia">    
+        <div class="box-header-interior">
+            <!-- <p>--</p>-->
+        </div>    
+        <form id="quizForm">
+            <div class="question" id="question1">         
+                <h6 class="contador" id="uno">
+                    <span>1</span>/10
+                </h6>
+                <p>¿En qué año se instituyó oficialmente el Día Nacional del Pisco en el Perú?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q1" value='1'>A. 1999 
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value='0'>B. 2004
+                    </label> 
+                    <label>
+                        <input type="radio" name="q1" value='0'>C. 2007
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value='0'>D. 2010
+                    </label>                 
+                </div>    
+                <div class="box-botones">
+                    <button class="siguiente" type="button" onclick="nextQuestion(1)" disabled>Continuar</button>
+                </div>                
+            </div>
+    
+            <div class="question" id="question2">
+                <h6 class="contador" id="dos">
+                    <span>2</span>/10
+                </h6>
+                <p class="small">¿Cuál de estas uvas NO se usa en la elaboración del pisco peruano?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q2" value='0'>A. Quebranta
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value='0'>B. Italia
+                    </label> 
+                    <label>
+                        <input type="radio" name="q2" value='1'>C. Sauvignon Blanc
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value='0'>D. Torontel
+                    </label> 
+                </div>
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(2)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(2)" disabled>Continuar</button>
+                </div>                
+            </div>
+    
+            <div class="question" id="question3">
+                <h6 class="contador" id="tres">
+                    <span>3</span>/10
+                </h6>
+                <p>¿Cuál de estos cócteles NO lleva pisco como ingrediente principal?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q3" value='0'>A. Capitán
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value='0'>B. Maracuyá sour
+                    </label> 
+                    <label>
+                        <input type="radio" name="q3" value='0'>C. Chilcano
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value='1'>D. Mojito 
+                    </label>
+                </div>
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(3)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(3)" disabled>Continuar</button>
+                </div>                
+            </div>
+    
+            <div class="question" id="question4">
+                <h6 class="contador" id="cuatro">
+                    <span>4</span>/10
+                </h6>
+                <p>¿Cómo se llama el pisco elaborado a partir de más de una variedad de uva?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q4" value='0'>A. Pisco mosto verde
+                    </label> 
+                    <label>
+                        <input type="radio" name="q4" value='0'>B. Pisco aromático
+                    </label>      
+                    <label>
+                        <input type="radio" name="q4" value='1'>C. Pisco acholado
+                    </label>     
+                    <label>
+                        <input type="radio" name="q4" value='0'>D.Pisco mixto
+                    </label>                   
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(4)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(4)" disabled>Continuar</button>
+                </div>                
+            </div>
+
+            <div class="question" id="question5">
+                <h6 class="contador" id="cinco">
+                    <span>5</span>/10
+                </h6>
+                <p>¿En qué siglo se elaboró por primera vez pisco en el Perú, según registros históricos?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q5" value='0'>A. Siglo XV
+                    </label> 
+                    <label>
+                        <input type="radio" name="q5" value='1'>B. Siglo XVI
+                    </label>  
+                    <label>
+                        <input type="radio" name="q5" value='0'>B. Siglo XVII
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value='0'>B. Siglo XVIII
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(5)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(5)" disabled>Continuar</button>
+                </div>                
+            </div>  
+
+            <div class="question" id="question6">
+                <h6 class="contador" id="seis">
+                    <span>6</span>/10
+                </h6>
+                <p>¿Qué puerto peruano fue clave en la exportación del pisco durante la época virreinal y dio origen a su nombre?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q6" value='0'>A. Callao
+                    </label> 
+                    <label>
+                        <input type="radio" name="q6" value='0'>B. Pimentel
+                    </label>    
+                    <label>
+                        <input type="radio" name="q6" value='1'>C. Pisco 
+                    </label>  
+                    <label>
+                        <input type="radio" name="q6" value='0'>D. Ilo
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(6)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(6)" disabled>Continuar</button>
+                </div>                
+            </div>  
+
+            <div class="question" id="question7">
+                <h6 class="contador" id="siete">
+                    <span>7</span>/10
+                </h6>
+                <p>¿Cuál de estas preparaciones peruanas puede incluir pisco como ingrediente en su receta?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q7" value='0'>A. Ají de gallina
+                    </label> 
+                    <label>
+                        <input type="radio" name="q7" value='1'>B. Lomo saltado
+                    </label>    
+                    <label>
+                        <input type="radio" name="q7" value='0'>C. Carapulcra 
+                    </label>  
+                    <label>
+                        <input type="radio" name="q7" value='0'>D. Causa limeña
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(7)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(7)" disabled>Continuar</button>
+                </div>                
+            </div>
+
+            <div class="question" id="question8">
+                <h6 class="contador" id="ocho">
+                    <span>8</span>/10
+                </h6>
+                <p>Pongamos a prueba tus conocimientos de maridaje: ¿con cuál de estos postres peruanos va mejor un pisco de uva Italia por su aroma frutal y floral?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q8" value='0'>A. Suspiro a la limeña
+                    </label> 
+                    <label>
+                        <input type="radio" name="q8" value='0'>B. Arroz con leche
+                    </label>    
+                    <label>
+                        <input type="radio" name="q8" value='1'>C. Mazamorra morada
+                    </label>  
+                    <label>
+                        <input type="radio" name="q8" value='0'>D. Turrón de Doña Pepa
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(8)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(8)" disabled>Continuar</button>
+                </div>                
+            </div>
+
+            <div class="question" id="question9">
+                <h6 class="contador" id="nueve">
+                    <span>9</span>/10
+                </h6>
+                <p>¿En qué fecha se celebra el Día Nacional del Pisco en el Perú?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q9" value='0'>A. 28 de julio
+                    </label> 
+                    <label>
+                        <input type="radio" name="q9" value='0'>B. Primer domingo de julio
+                    </label>    
+                    <label>
+                        <input type="radio" name="q9" value='1'>C. Cuarto domingo de julio
+                    </label>  
+                    <label>
+                        <input type="radio" name="q9" value='0'>D. 15 de agosto
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(9)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="nextQuestion(9)" disabled>Continuar</button>
+                </div>                
+            </div>
+
+            <div class="question" id="question10">
+                <h6 class="contador" id="diez">
+                    <span>10</span>/10
+                </h6>
+                <p>¿Cuál es la principal diferencia entre un pisco “puro” y un pisco “mosto verde”?</p>
+                <div class="box-preguntas">
+                    <label>
+                        <input type="radio" name="q10" value='0'>A. El grado alcohólico
+                    </label> 
+                    <label>
+                        <input type="radio" name="q10" value='0'>B. El tipo de destilación
+                    </label>    
+                    <label>
+                        <input type="radio" name="q10" value='0'>C. El tiempo de reposo
+                    </label>  
+                    <label>
+                        <input type="radio" name="q10" value='1'>D. El momento en que se destila el mosto
+                    </label>                  
+                </div>            
+                <div class="box-botones">
+                    <button class="previo" type="button" onclick="prevQuestion(10)">
+                        <img src="./img/btn-previo.png" alt="" width="100%">
+                    </button>
+                    <button class="siguiente" type="button" onclick="calculateResult()" disabled>Ver resultado</button>
+                </div>                
+            </div>
+
+        </form>  
+    </div>
+
+    <div class="box-main-result" id="box-main-result">        
+        <div class="result" id="result">            
+        </div>        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+
+    <!-- compartir -->
+    <script>
+        function shareUrl(event) {
+            const button = event.target;
+            const url = button.getAttribute('data-url');
+            
+            const sharer = button.getAttribute('data-sharer');
+            let shareUrl = '';
+
+            switch (sharer) {
+            case 'facebook':
+                const fbHashtag = button.getAttribute('data-hashtag') || '';
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&hashtag=${encodeURIComponent(fbHashtag)}`;
+                break;
+                
+            case 'whatsapp':
+                const whatsappTitle = button.getAttribute('data-title');
+                shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappTitle + ' ' + url)}`;
+                break;
+                
+            case 'twitter':
+                const twitterTitle = button.getAttribute('data-title');
+                const twitterHashtags = button.getAttribute('data-hashtags');
+                const twitterVia = button.getAttribute('data-via');
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterTitle)}&url=${encodeURIComponent(url)}&hashtags=${twitterHashtags}&via=${twitterVia}`;
+                break;
+            }
+
+            window.open(shareUrl, '_blank');
+        }
+
+        document.querySelectorAll('.sharer').forEach(button => {
+            button.addEventListener('click', shareUrl);
+        });
+    </script>
+
+    <!-- trivia -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('startScreen').style.display = 'block';
+        });
+
+        function startQuiz() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('box-main-trivia').style.display = 'block';
+            document.getElementById('quizForm').style.display = 'block';
+            showQuestion(1);
+        }
+
+        function showQuestion(questionNumber) {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach((question, index) => {
+                question.classList.remove('active');
+                if (index === questionNumber - 1) {
+                    question.classList.add('active');
+                }
+            });
+        }
+
+        function nextQuestion(current) {
+            showQuestion(current + 1);
+        }
+
+        function prevQuestion(current) {
+            showQuestion(current - 1);
+        }
+
+        function calculateResult() {
+            const form = document.getElementById('quizForm');
+            const answers = new FormData(form);
+            let score = 0;
+
+            // Contar respuestas correctas (value = '1')
+            for (let [key, value] of answers.entries()) {
+                if (value === '1') {
+                    score++;
+                }
+            }
+
+            // Definir mensajes según puntaje
+            let message = '';
+            if (score <= 3) {
+                message = `
+                    <h4>¡Estás en la fase de maceración!</h4>
+                    <p><span>Aún no eres un pisco puro, pero vas bien.</span> Sigue brindando con orgullo y aprendiendo más sobre nuestra bebida bandera. <span>¡Tu camino pisquero recién empieza!</span></p>
+                `;
+            } else if (score <= 7) {
+                message = `
+                    <h4>¡Tu conocimiento del pisco está en su punto!</h4>
+                    <p><span>Vas como un acholado: con mezcla poderosa y bien peruana.</span> Te falta poquito para ser el alma de cualquier barra criolla. <span>¡Vamos que sí se puede!</span></p>
+                `;
+            } else {
+                message = `
+                    <h4>¡Maestro pisquero, usted merece una medalla!</h4>
+                    <p><span>Tienes más conocimiento que una etiqueta de botella.</span> ¡Brinda con orgullo, que el pisco corre por tus venas como buen peruano de corazón!</p>
+                `;
+            }
+
+            // Oculta las preguntas y muestra el resultado
+            document.querySelector('.question.active')?.classList.remove('active');
+            document.getElementById('box-main-trivia').style.display = 'none';
+            document.getElementById('box-main-result').style.display = 'block';
+            document.getElementById('result').style.display = 'block';
+
+            // Mostrar resultado final
+            document.getElementById('result').innerHTML = `
+                <div class="bg-header-resultado"> </div>
+                <div class="box-ctn-resultado"> 
+                    <!--<h3>Respuestas correctas: ${score}/10</h3>-->
+                    ${message}
+                    <a href="./index.html">Intentar de nuevo</a>
+                </div>
+                <div class="box-footer footer-resultado">
+                    <p><span>Contenido:</span> Provecho</p>
+                    <p><span>Realización:</span> Nuevas Narrativas EC</p>
+                </div>
+            `;
+        }
+
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                const currentQuestion = event.target.closest('.question');
+                const nextButton = currentQuestion.querySelector('button[onclick^="nextQuestion"], button[onclick="calculateResult()"]');
+                nextButton.disabled = false;
+            });
+        });
+
+
+    </script>
+    
+    <!-- active label -->
+    <script>
+        document.querySelectorAll('.box-preguntas label').forEach(label => {
+            label.addEventListener('click', function() {
+                document.querySelectorAll('.box-preguntas label').forEach(label => label.classList.remove('active'));               
+                this.classList.add('active');
+            });
+        });
+
+    </script>
+
+
+</body>
+</html>
