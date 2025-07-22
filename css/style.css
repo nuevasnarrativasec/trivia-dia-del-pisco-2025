@@ -495,14 +495,16 @@ body{
        background-size: cover;
     }
         .box-titular{
-            width: 90%;
+            left: 35%;
+            width: 65%;
         }
             .box-titular h1{
-                font-size: 3em;
+                letter-spacing: -0.5px;
+                font-size: 1.75em;                
             }
             .box-titular p{
-                font-size: 19px;
-                line-height: 1.4;
+                font-size: 1rem;
+                line-height: 1.6;
             }
     body .box-main-trivia{
         height: 100%;
@@ -512,7 +514,7 @@ body{
             height: 100%;
             left: inherit;
             padding-bottom: 50px;
-            padding-top: 20px;
+            padding-top: 0;
             position: relative;
             transform: inherit;
             top: inherit;
