@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/style.css?v3">
+    <link rel="stylesheet" href="./css/style.css?v6">
 
     <style>
         #gpt_zocalo, 
@@ -81,11 +81,12 @@
     </div>
 
     <div class="box-main-trivia" id="box-main-trivia">    
-        <div class="box-header-interior">
-            <!-- <p>--</p>-->
-        </div>    
+        <!--<div class="box-header-interior">
+            <p>--</p>
+        </div>-->    
         <form id="quizForm">
-            <div class="question" id="question1">         
+            <div class="question" id="question1">   
+                <img src="./img/bg-cabecera-pregunta-1.jpg" alt="Pregunta 1" style="width:100%; display:block;">      
                 <h6 class="contador" id="uno">
                     <span>1</span>/10
                 </h6>
@@ -110,6 +111,7 @@
             </div>
     
             <div class="question" id="question2">
+                <img src="./img/bg-cabecera-pregunta-2.jpg" alt="Pregunta 2" style="width:100%; display:block;">  
                 <h6 class="contador" id="dos">
                     <span>2</span>/10
                 </h6>
@@ -137,6 +139,7 @@
             </div>
     
             <div class="question" id="question3">
+                <img src="./img/bg-cabecera-pregunta-3.jpg" alt="Pregunta 3" style="width:100%; display:block;">  
                 <h6 class="contador" id="tres">
                     <span>3</span>/10
                 </h6>
@@ -164,6 +167,7 @@
             </div>
     
             <div class="question" id="question4">
+                <img src="./img/bg-cabecera-pregunta-4.jpg" alt="Pregunta 4" style="width:100%; display:block;">  
                 <h6 class="contador" id="cuatro">
                     <span>4</span>/10
                 </h6>
@@ -191,6 +195,7 @@
             </div>
 
             <div class="question" id="question5">
+                <img src="./img/bg-cabecera-pregunta-5.jpg" alt="Pregunta 5" style="width:100%; display:block;">  
                 <h6 class="contador" id="cinco">
                     <span>5</span>/10
                 </h6>
@@ -218,6 +223,7 @@
             </div>  
 
             <div class="question" id="question6">
+                <img src="./img/bg-cabecera-pregunta-6.jpg" alt="Pregunta 6" style="width:100%; display:block;"> 
                 <h6 class="contador" id="seis">
                     <span>6</span>/10
                 </h6>
@@ -245,6 +251,7 @@
             </div>  
 
             <div class="question" id="question7">
+                <img src="./img/bg-cabecera-pregunta-7.jpg" alt="Pregunta 7" style="width:100%; display:block;"> 
                 <h6 class="contador" id="siete">
                     <span>7</span>/10
                 </h6>
@@ -272,6 +279,7 @@
             </div>
 
             <div class="question" id="question8">
+                <img src="./img/bg-cabecera-pregunta-8.jpg" alt="Pregunta 8" style="width:100%; display:block;"> 
                 <h6 class="contador" id="ocho">
                     <span>8</span>/10
                 </h6>
@@ -299,6 +307,7 @@
             </div>
 
             <div class="question" id="question9">
+                <img src="./img/bg-cabecera-pregunta-9.jpg" alt="Pregunta 9" style="width:100%; display:block;">
                 <h6 class="contador" id="nueve">
                     <span>9</span>/10
                 </h6>
@@ -326,6 +335,7 @@
             </div>
 
             <div class="question" id="question10">
+                <img src="./img/bg-cabecera-pregunta-10.jpg" alt="Pregunta 10" style="width:100%; display:block;">
                 <h6 class="contador" id="diez">
                     <span>10</span>/10
                 </h6>
@@ -434,43 +444,44 @@
             const answers = new FormData(form);
             let score = 0;
 
-            // Contar respuestas correctas (value = '1')
             for (let [key, value] of answers.entries()) {
-                if (value === '1') {
-                    score++;
-                }
+                if (value === '1') score++;
             }
 
-            // Definir mensajes según puntaje
-            let message = '';
+            // Variables para imagen y mensaje
+            let img = "";
+            let message = "";
+
             if (score <= 3) {
+                img = "./img/resultado-bajo.jpg"; 
                 message = `
                     <h4>¡Estás en la fase de maceración!</h4>
-                    <p><span>Aún no eres un pisco puro, pero vas bien.</span> Sigue brindando con orgullo y aprendiendo más sobre nuestra bebida bandera. <span>¡Tu camino pisquero recién empieza!</span></p>
+                    <p><strong>Aún no eres un pisco puro, pero vas bien.</strong> Sigue brindando con orgullo y aprendiendo más sobre nuestra bebida bandera. <strong>¡Tu camino pisquero recién empieza!</strong></p>
                 `;
             } else if (score <= 7) {
+                img = "./img/resultado-medio.jpg";
                 message = `
                     <h4>¡Tu conocimiento del pisco está en su punto!</h4>
-                    <p><span>Vas como un acholado: con mezcla poderosa y bien peruana.</span> Te falta poquito para ser el alma de cualquier barra criolla. <span>¡Vamos que sí se puede!</span></p>
+                    <p>Vas como un acholado: <strong>con mezcla poderosa y bien peruana.</strong> Te falta poquito para ser el alma de cualquier barra criolla. <strong>¡Vamos que sí se puede!</strong></p>
                 `;
             } else {
+                img = "./img/resultado-alto.jpg";
                 message = `
                     <h4>¡Maestro pisquero, usted merece una medalla!</h4>
-                    <p><span>Tienes más conocimiento que una etiqueta de botella.</span> ¡Brinda con orgullo, que el pisco corre por tus venas como buen peruano de corazón!</p>
+                    <p><strong>Tienes más conocimiento que una etiqueta de botella.</strong> ¡Brinda con orgullo, que el pisco corre por tus venas como buen peruano de corazón!</p>
                 `;
             }
 
-            // Oculta las preguntas y muestra el resultado
+            // Oculta preguntas y muestra resultado
             document.querySelector('.question.active')?.classList.remove('active');
             document.getElementById('box-main-trivia').style.display = 'none';
             document.getElementById('box-main-result').style.display = 'block';
             document.getElementById('result').style.display = 'block';
 
-            // Mostrar resultado final
+            // Mostrar resultado final con imagen
             document.getElementById('result').innerHTML = `
-                <div class="bg-header-resultado"> </div>
-                <div class="box-ctn-resultado"> 
-                    <!--<h3>Respuestas correctas: ${score}/10</h3>-->
+                <img src="${img}" alt="Resultado" style="width:100%; display:block;">
+                <div class="box-ctn-resultado">
                     ${message}
                     <a href="./index.html">Intentar de nuevo</a>
                 </div>
@@ -480,6 +491,7 @@
                 </div>
             `;
         }
+
 
 
         document.querySelectorAll('input[type="radio"]').forEach(radio => {

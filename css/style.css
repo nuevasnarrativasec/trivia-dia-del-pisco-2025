@@ -173,7 +173,9 @@ body{
             font: 15px/60px "Noto Serif KR", serif;           
             height: 70px;
             margin: 0 auto 10px;
-            max-width: 70px;
+            margin-top: -20px;
+            max-width: 70px;           
+            position: relative;
         }
             h6.contador span{
                 font-size: 30px;
@@ -220,7 +222,7 @@ body{
             }
         .box-main-trivia .question{
             margin: 0 auto;        
-            padding-top: 85px;    
+            /*padding-top: 85px;*/    
             text-align: center;
             width: 750px;
         }
@@ -440,7 +442,7 @@ body{
 .question img{
     display: block;
     margin: 0 auto;
-    max-width: 65px;
+    max-width: 100%;
 }
 
 .box-header-interior{
@@ -459,6 +461,11 @@ body{
         padding: 35px 0 0;
         text-align: center;
     }
+
+#box-main-trivia,
+#box-main-result {
+    display: none;
+}
 
 @media only screen and (max-width: 640px) {    
 
@@ -484,7 +491,7 @@ body{
         margin: 5px auto;
     }
     #startScreen{
-       background: url('../img/bg-portada-movil.jpg') no-repeat center center;
+       background: url('../img/bg-portada-movil.jpg?v2') no-repeat center center;
        background-size: cover;
     }
         .box-titular{
