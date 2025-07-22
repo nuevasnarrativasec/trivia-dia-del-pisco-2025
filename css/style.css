@@ -496,7 +496,8 @@ body{
     }
         .box-titular{
             left: 35%;
-            width: 65%;
+            width: 60%;
+            transform: translate(0, -50%);
         }
             .box-titular h1{
                 letter-spacing: -0.5px;
