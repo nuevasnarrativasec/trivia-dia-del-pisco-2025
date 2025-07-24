@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/style.css?v9">
+    <link rel="stylesheet" href="./css/style.css?v11">
 
     <style>
         #gpt_zocalo, 
@@ -410,111 +410,196 @@
 
     <!-- trivia -->
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('startScreen').style.display = 'block';
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('startScreen').style.display = 'block';
+        document.getElementById('box-main-trivia').style.display = 'none';
+        document.getElementById('box-main-result').style.display = 'none';
 
-        function startQuiz() {
-            document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('box-main-trivia').style.display = 'block';
-            document.getElementById('quizForm').style.display = 'block';
-            showQuestion(1);
-        }
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', event => {
+                const currentQuestion = event.target.closest('.question');
+                const selected = event.target;
+                const allRadios = currentQuestion.querySelectorAll('input[type="radio"]');
+                const labels = currentQuestion.querySelectorAll('label');
 
-        function showQuestion(questionNumber) {
-            const questions = document.querySelectorAll('.question');
-            questions.forEach((question, index) => {
-                question.classList.remove('active');
-                if (index === questionNumber - 1) {
-                    question.classList.add('active');
+                // Desactivar todos los radios
+                allRadios.forEach(r => r.disabled = true);
+
+                // Limpiar clases previas
+                labels.forEach(l => l.classList.remove('correct', 'incorrect', 'selected'));
+
+                // Agregar clase 'selected' a la opción elegida
+                selected.closest('label').classList.add('selected');
+
+                // Resaltar correcta
+                labels.forEach(label => {
+                    const input = label.querySelector('input[type="radio"]');
+                    if (input.value === '1') {
+                        label.classList.add('correct');
+                    }
+                });
+
+                // Si la seleccionada es incorrecta, resáltala también
+                if (selected.value !== '1') {
+                    selected.closest('label').classList.add('incorrect');
                 }
+
+                // Mostrar mensaje
+                let feedback = currentQuestion.querySelector('.feedback');
+                if (!feedback) {
+                    feedback = document.createElement('div');
+                    feedback.classList.add('feedback');
+                    currentQuestion.appendChild(feedback);
+                }
+
+                feedback.textContent = selected.value === '1' ? '✅ Respuesta correcta' : '❌ Respuesta incorrecta';
+                feedback.style.marginTop = '1rem';
+                feedback.style.fontWeight = 'bold';
+
+                // Activar botón siguiente o resultado
+                const nextButton = currentQuestion.querySelector('button[onclick^="nextQuestion"], button[onclick=' + '"calculateResult()"' + ']');
+                if (nextButton) nextButton.disabled = false;
             });
-        }
+        });
+    });
 
-        function nextQuestion(current) {
-            showQuestion(current + 1);
-        }
+    function startQuiz() {
+        document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('box-main-trivia').style.display = 'block';
+        document.getElementById('quizForm').style.display = 'block';
+        showQuestion(1);
+    }
 
-        function prevQuestion(current) {
-            showQuestion(current - 1);
-        }
+    function showQuestion(questionNumber) {
+        const questions = document.querySelectorAll('.question');
 
-        function calculateResult() {
-            const form = document.getElementById('quizForm');
-            const answers = new FormData(form);
-            let score = 0;
+        questions.forEach((question, index) => {
+            question.classList.remove('active');
 
-            for (let [key, value] of answers.entries()) {
-                if (value === '1') score++;
+            if (index === questionNumber - 1) {
+                question.classList.add('active');
+
+                // Al activarse una pregunta, agregar el listener a sus radios
+                const radios = question.querySelectorAll('input[type="radio"]');
+                const labels = question.querySelectorAll('label');
+
+                radios.forEach(radio => {
+                    if (!radio.dataset.listenerAdded) {
+                        radio.addEventListener('change', event => {
+                            const selected = event.target;
+
+                            // Desactivar todos los radios de esa pregunta
+                            radios.forEach(r => {
+                                r.disabled = true;
+                                r.closest('label')?.classList.add('disabled');
+                            });
+
+                            // Limpiar clases previas
+                            labels.forEach(label => label.classList.remove('correct', 'incorrect', 'selected'));
+
+                            // Marcar opción elegida
+                            selected.closest('label').classList.add('selected');
+
+                            // Marcar correcta
+                            labels.forEach(label => {
+                                const input = label.querySelector('input[type="radio"]');
+                                if (input.value === '1') {
+                                    label.classList.add('correct');
+                                }
+                            });
+
+                            // Si respondió mal, marcar incorrecta
+                            if (selected.value !== '1') {
+                                selected.closest('label').classList.add('incorrect');
+                            }
+
+                            // Mostrar mensaje
+                            let feedback = question.querySelector('.feedback');
+                            if (!feedback) {
+                                feedback = document.createElement('div');
+                                feedback.classList.add('feedback');
+                                question.appendChild(feedback);
+                            }
+
+                            const isCorrect = selected.value === '1';
+                            feedback.textContent = isCorrect ? '¡Respuesta correcta!' : '¡Respuesta incorrecta!';
+                            feedback.classList.remove('correct', 'incorrect');
+                            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+                            // Activar botón continuar o resultado
+                            const nextButton = question.querySelector('button[onclick^="nextQuestion"], button[onclick="calculateResult()"]');
+                            if (nextButton) nextButton.disabled = false;
+                        });
+
+                        // Marcar que ya se le añadió el listener
+                        radio.dataset.listenerAdded = true;
+                    }
+                });
             }
+        });
+    }
 
-            // Variables para imagen y mensaje
-            let img = "";
-            let message = "";
 
-            if (score <= 3) {
-                img = "./img/resultado-bajo.jpg"; 
-                message = `
-                    <h4>¡Estás en la fase de maceración!</h4>
-                    <p><strong>Aún no eres un pisco puro, pero vas bien.</strong> Sigue brindando con orgullo y aprendiendo más sobre nuestra bebida bandera. <strong>¡Tu camino pisquero recién empieza!</strong></p>
-                `;
-            } else if (score <= 7) {
-                img = "./img/resultado-medio.jpg";
-                message = `
-                    <h4>¡Tu conocimiento del pisco está en su punto!</h4>
-                    <p>Vas como un acholado: <strong>con mezcla poderosa y bien peruana.</strong> Te falta poquito para ser el alma de cualquier barra criolla. <strong>¡Vamos que sí se puede!</strong></p>
-                `;
-            } else {
-                img = "./img/resultado-alto.jpg";
-                message = `
-                    <h4>¡Maestro pisquero, usted merece una medalla!</h4>
-                    <p><strong>Tienes más conocimiento que una etiqueta de botella.</strong> ¡Brinda con orgullo, que el pisco corre por tus venas como buen peruano de corazón!</p>
-                `;
-            }
+    function nextQuestion(current) {
+        showQuestion(current + 1);
+    }
 
-            // Oculta preguntas y muestra resultado
-            document.querySelector('.question.active')?.classList.remove('active');
-            document.getElementById('box-main-trivia').style.display = 'none';
-            document.getElementById('box-main-result').style.display = 'block';
-            document.getElementById('result').style.display = 'block';
+    function prevQuestion(current) {
+        showQuestion(current - 1);
+    }
 
-            // Mostrar resultado final con imagen
-            document.getElementById('result').innerHTML = `
-                <img src="${img}" alt="Resultado" style="width:100%; display:block;">
-                <div class="box-ctn-resultado">
-                    ${message}
-                    <a href="./index.html">Intentar de nuevo</a>
-                </div>
-                <div class="box-footer footer-resultado">
-                    <p><span>Contenido:</span> Provecho</p>
-                    <p><span>Realización:</span> Nuevas Narrativas EC</p>
-                </div>
+    function calculateResult() {
+        const form = document.getElementById('quizForm');
+        const answers = new FormData(form);
+        let score = 0;
+
+        for (let [key, value] of answers.entries()) {
+            if (value === '1') score++;
+        }
+
+        // Variables para imagen y mensaje
+        let img = "";
+        let message = "";
+
+        if (score <= 3) {
+            img = "./img/resultado-bajo.jpg";
+            message = `
+                <h4>¡Estás en la fase de maceración!</h4>
+                <p><strong>Aún no eres un pisco puro, pero vas bien.</strong> Sigue brindando con orgullo y aprendiendo más sobre nuestra bebida bandera. <strong>¡Tu camino pisquero recién empieza!</strong></p>
+            `;
+        } else if (score <= 7) {
+            img = "./img/resultado-medio.jpg";
+            message = `
+                <h4>¡Tu conocimiento del pisco está en su punto!</h4>
+                <p>Vas como un acholado: <strong>con mezcla poderosa y bien peruana.</strong> Te falta poquito para ser el alma de cualquier barra criolla. <strong>¡Vamos que sí se puede!</strong></p>
+            `;
+        } else {
+            img = "./img/resultado-alto.jpg";
+            message = `
+                <h4>¡Maestro pisquero, usted merece una medalla!</h4>
+                <p><strong>Tienes más conocimiento que una etiqueta de botella.</strong> ¡Brinda con orgullo, que el pisco corre por tus venas como buen peruano de corazón!</p>
             `;
         }
 
+        document.querySelector('.question.active')?.classList.remove('active');
+        document.getElementById('box-main-trivia').style.display = 'none';
+        document.getElementById('box-main-result').style.display = 'block';
+        document.getElementById('result').style.display = 'block';
 
-
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.addEventListener('change', (event) => {
-                const currentQuestion = event.target.closest('.question');
-                const nextButton = currentQuestion.querySelector('button[onclick^="nextQuestion"], button[onclick="calculateResult()"]');
-                nextButton.disabled = false;
-            });
-        });
-
-
+        document.getElementById('result').innerHTML = `
+            <img src="${img}" alt="Resultado" style="width:100%; display:block;">
+            <div class="box-ctn-resultado">
+                ${message}
+                <a href="./index.html">Intentar de nuevo</a>
+            </div>
+            <div class="box-footer footer-resultado">
+                <p><span>Contenido:</span> Provecho</p>
+                <p><span>Realización:</span> Nuevas Narrativas EC</p>
+            </div>
+        `;
+    }
     </script>
-    
-    <!-- active label -->
-    <script>
-        document.querySelectorAll('.box-preguntas label').forEach(label => {
-            label.addEventListener('click', function() {
-                document.querySelectorAll('.box-preguntas label').forEach(label => label.classList.remove('active'));               
-                this.classList.add('active');
-            });
-        });
 
-    </script>
 
 
 </body>
